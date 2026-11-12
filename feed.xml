@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/"><channel>
 <title>RootLab</title><link>https://rdn513.github.io/rootlab-feed</link><description>Практика DevOps и ИБ без воды</description><language>ru</language>
-<item><title>🚗 Машину открыли паролем admin: как «заводские настройки» дошли до дверей</title><link>https://rdn513.github.io/rootlab-feed/2026-11-12/am-r2</link><guid isPermaLink="false">rootlab-2026-11-12-am-r2</guid>
-<pubDate>Thu, 12 Nov 2026 05:30:00 +0300</pubDate><media:rating scheme="urn:simple">nonadult</media:rating><category>format-article</category><category>index</category>
+<item><title>🚗 Машину открыли паролем admin: как «заводские настройки» дошли до дверей</title><link>https://rdn513.github.io/rootlab-feed/2026-11-12/am-r2</link><guid isPermaLink="false">rootlab-2026-11-12-am-r2-f1</guid>
+<pubDate>Thu, 12 Nov 2026 11:01:27 +0300</pubDate><media:rating scheme="urn:simple">nonadult</media:rating><category>format-article</category><category>index</category>
 <enclosure url="https://rdn513.github.io/rootlab-feed/2026-11-12/am-r2.png" type="image/png"/>
 <content:encoded><![CDATA[<figure><img src="https://rdn513.github.io/rootlab-feed/2026-11-12/am-r2.png"/></figure><p>Иногда самые громкие истории в ИБ устроены до обидного просто. Исследователи Шубхам Шах и Сэм Карри показали, как можно было удалённо открывать машины и запускать двигатели у клиентов двух автопроизводителей. Об этом The Hacker News, а за ним iXBT рассказали 9 ноября. Названия брендов в материале не приводятся, и мы их не угадываем.</p>
 <p>Мобильные приложения обоих брендов использовали платформу управления учётными записями ForgeRock, которая теперь принадлежит Ping Identity. Уязвимость при этом сидела не в самой платформе, а в том, как её развернули.</p>
