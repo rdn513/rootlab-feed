@@ -1,31 +1,42 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Outlook сливает хеш пароля при открытии файла сообщения, и дыру уже эксплуатируют</title><meta property="og:title" content="Outlook сливает хеш пароля при открытии файла сообщения, и дыру уже эксплуатируют"><meta property="og:image" content="https://rdn513.github.io/rootlab-feed/2026-11-11/pm.png"><meta property="og:type" content="article">
-<style>:root{--bg:#fff;--fg:#1c1e21;--mut:#6b7280;--ac:#b3261e;--line:#e5e7eb}@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8eaed;--mut:#9aa0a6;--line:#2b2f38}}
-body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.7 -apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:700px;margin:0 auto;padding:24px 18px 64px}img.cover{width:100%;border-radius:14px;display:block}
-h1{font-size:30px;line-height:1.25;margin:24px 0 6px}.meta{color:var(--mut);font-size:15px;margin-bottom:28px}
-p{margin:0 0 1.1em}ul{padding:0;list-style:none;margin:0 0 1.2em}li{padding:10px 14px 10px 14px;margin:0 0 8px;border-left:3px solid var(--ac);background:rgba(127,127,127,.08);border-radius:0 8px 8px 0}
-blockquote{margin:1.4em 0;padding:4px 0 4px 18px;border-left:4px solid var(--ac);font-size:21px;line-height:1.5;font-style:italic}
-a{color:#2a6df4}footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:15px}</style></head>
-<body><main><img class="cover" src="https://rdn513.github.io/rootlab-feed/2026-11-11/pm.png" alt=""><h1>Outlook сливает хеш пароля при открытии файла сообщения, и дыру уже эксплуатируют</h1><div class="meta">RootLab · 11.11.2026</div><p>Во вторник, 10 ноября, Microsoft выпустила ноябрьский пакет исправлений, и по размеру он снова из разряда «закройте календарь на вечер».</p>
-<p>Цифры у источников расходятся: в <a href="https://blog.qualys.com/vulnerabilities-threat-research/2026/11/10/microsoft-patch-tuesday-november-2026-security-update-review">тексте Qualys</a> указано 1235 уязвимостей, а итог её сводной таблицы — 1094. Основная часть приходится на Windows, ещё 142 записи — Edge на движке Chromium, плюс множество критических дыр в Office, Active Directory и других компонентах.</p>
+<style>:root{--bg:#fff;--fg:#1c1e21;--mut:#6b7280;--ac:#b3261e;--line:#e5e7eb;--card:#f4f5f7}@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8eaed;--mut:#9aa0a6;--line:#2b2f38;--card:#1a1d24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:19px/1.8 -apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:680px;margin:0 auto;padding:28px 20px 80px}img.cover{width:100%;border-radius:16px;display:block}
+h1{font-size:32px;line-height:1.22;margin:28px 0 8px;letter-spacing:-.01em}.meta{color:var(--mut);font-size:15px;margin-bottom:34px}
+p{margin:0 0 1.35em}p.lead{font-size:22px;line-height:1.6;font-weight:600;margin-bottom:1.6em}
+ul,ol{padding:0;list-style:none;margin:1.6em 0 1.8em;counter-reset:n}li{counter-increment:n;position:relative;padding:14px 16px 14px 56px;margin:0 0 12px;background:var(--card);border-radius:12px}
+li:before{content:counter(n);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ac);color:#fff;font:700 15px/28px sans-serif;text-align:center}
+blockquote{margin:2em 0;padding:6px 0 6px 20px;border-left:4px solid var(--ac);font-size:22px;line-height:1.5;font-style:italic}
+h2{font-size:25px;line-height:1.3;margin:2em 0 .6em}
+p.cta{margin:2em 0 1.4em;padding:18px 20px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+p.src{font-size:15px;line-height:1.6;color:var(--mut);margin:2em 0 .8em;padding-top:18px;border-top:1px solid var(--line)}p.tags{font-size:15px;color:var(--mut)}
+a{color:#2a6df4}footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:15px}</style></head>
+<body><main><img class="cover" src="https://rdn513.github.io/rootlab-feed/2026-11-11/pm.png" alt=""><h1>Outlook сливает хеш пароля при открытии файла сообщения, и дыру уже эксплуатируют</h1><div class="meta">RootLab · 11.11.2026</div><p class="lead">Во вторник, 10 ноября, Microsoft выпустила ноябрьский пакет исправлений, и по размеру он снова из разряда «закройте календарь на вечер».</p>
+<p>Цифры у источников расходятся: в <a href="https://blog.qualys.com/vulnerabilities-threat-research/2026/11/10/microsoft-patch-tuesday-november-2026-security-update-review">тексте Qualys</a> указано 1235 уязвимостей, а итог её сводной таблицы — 1094.</p>
+<p>Основная часть приходится на Windows, ещё 142 записи — Edge на движке Chromium, плюс множество критических дыр в Office, Active Directory и других компонентах.</p>
 <p>Когда патчей столько, у администратора возникает соблазн поставить «всё сразу» и считать задачу закрытой. Об этом и поговорим: среди этой горы есть одна запись, которая такого подхода не терпит.</p>
 <h2>Одна запись среди тысячи</h2>
 <p>Это CVE-2026-124194, уязвимость подмены (spoofing) в Microsoft Outlook. <a href="https://blog.qualys.com/vulnerabilities-threat-research/2026/11/10/microsoft-patch-tuesday-november-2026-security-update-review">Qualys</a> и <a href="https://www.comss.ru/page.php?id=22816">Comss</a> указывают, что она единственная в выпуске, которую уже используют в реальных атаках. Это zero-day.</p>
-<p>Механика, как её описывают <a href="https://www.comss.ru/page.php?id=22816">Comss</a> и <a href="https://www.anti-malware.ru/news/2026-11-11-111332/52006">Anti-Malware</a>, такая. Злоумышленник отправляет специально подготовленный файл сообщения. Пользователь открывает его в уязвимой версии Outlook, и клиент обращается к сетевому ресурсу атакующего без обычного предупреждения о внешнем содержимом.</p>
+<p>Механика, как её описывают <a href="https://www.comss.ru/page.php?id=22816">Comss</a> и <a href="https://www.anti-malware.ru/news/2026-11-11-111332/52006">Anti-Malware</a>, такая. Злоумышленник отправляет специально подготовленный файл сообщения.</p>
+<p>Пользователь открывает его в уязвимой версии Outlook, и клиент обращается к сетевому ресурсу атакующего без обычного предупреждения о внешнем содержимом.</p>
 <p>Windows при этом может автоматически пройти аутентификацию, и у атакующего оказывается хеш NTLMv2. Дальше его можно подбирать офлайн, пока не получится пароль.</p>
 <h2>Почему «средняя» оценка не повод расслабиться</h2>
 <p>Оценка у уязвимости скромная. По <a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/">данным SecurityOnline</a>, CVSS равен 6.5, а Microsoft считает её умеренной: слабость описана как отсутствие предупреждения пользователя о небезопасном действии в интерфейсе.</p>
-<p>Для атаки нужны сетевое подключение и действие пользователя: файл надо открыть. По словам исследователя Rapid7, на которого ссылается <a href="https://windowsforum.com/news/november-2026-patch-tuesday-exploited-outlook-zero-day-requires-office-update.451775/">WindowsForum</a>, область предпросмотра вектором не является, так что одного получения письма недостаточно.</p>
+<p>Для атаки нужны сетевое подключение и действие пользователя: файл надо открыть.</p>
+<p>По словам исследователя Rapid7, на которого ссылается <a href="https://windowsforum.com/news/november-2026-patch-tuesday-exploited-outlook-zero-day-requires-office-update.451775/">WindowsForum</a>, область предпросмотра вектором не является, так что одного получения письма недостаточно.</p>
 <p>Звучит успокаивающе, пока не вспомнишь, как устроена почта в обычной компании: люди открывают вложения постоянно, и, на наш взгляд, файл сообщения вполне может сойти за рядовое пересланное письмо.</p>
 <blockquote>Шкала CVSS измеряет уязвимость в вакууме, а не ваш риск. Статус «эксплуатируется» значит, что рабочий способ атаки есть у кого-то, кто готов им пользоваться прямо сейчас.</blockquote>
-<p>Американское агентство CISA, судя по <a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/">тем же данным</a>, добавило уязвимость в каталог KEV 10 ноября и дало федеральным ведомствам срок до 24 ноября. Российского регулятора этот срок ни к чему не обязывает, но как ориентир по срочности он показателен: две недели считаются предельными, а не комфортными.</p>
+<p>Американское агентство CISA, судя по <a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/">тем же данным</a>, добавило уязвимость в каталог KEV 10 ноября и дало федеральным ведомствам срок до 24 ноября.</p>
+<p>Российского регулятора этот срок ни к чему не обязывает, но как ориентир по срочности он показателен: две недели считаются предельными, а не комфортными.</p>
 <p>Теперь о том, почему утечка хеша не мелочь. Хеш NTLMv2 не равен паролю, но слабый или предсказуемый пароль подбирается быстро, а для сложного у серьёзного атакующего могут найтись нужные ресурсы.</p>
-<p>Если пароль подобран, всё зависит от того, куда эта учётная запись пускает: почта, VPN, файловые серверы, а иногда и привилегированные сервисы. Отдельный риск — повторное использование паролей: если сотрудник пользуется одним паролем в нескольких местах, утечка в одном открывает остальные.</p>
+<p>Если пароль подобран, всё зависит от того, куда эта учётная запись пускает: почта, VPN, файловые серверы, а иногда и привилегированные сервисы.</p>
+<p>Отдельный риск — повторное использование паролей: если сотрудник пользуется одним паролем в нескольких местах, утечка в одном открывает остальные.</p>
 <h2>Патч приходит не оттуда, откуда вы ждёте</h2>
 <p>Самое важное практическое обстоятельство, которое легко упустить: как устанавливается исправление. По данным <a href="https://windowsforum.com/news/november-2026-patch-tuesday-exploited-outlook-zero-day-requires-office-update.451775/">WindowsForum</a>, патч для CVE-2026-124194 приходит по каналу обновлений Office, а не через Windows Update.</p>
 <p>Значит, администратор, который убедился, что ноябрьские обновления Windows накатились на парк, может на самом деле оставить Outlook непропатченным.</p>
-<p><a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/">SecurityOnline</a> называет исправленные сборки для долгосрочных редакций: Office LTSC 2021 — 16.0.14334.21048, Office LTSC 2024 — 16.0.17932.21140. Сборки для Microsoft 365 Apps там не уточняются, поэтому смотрите бюллетень Microsoft по этой уязвимости. Номера лучше сверить с первоисточником, а не с нашим пересказом.</p>
+<p><a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/">SecurityOnline</a> называет исправленные сборки для долгосрочных редакций: Office LTSC 2021 — 16.0.14334.21048, Office LTSC 2024 — 16.0.17932.21140.</p>
+<p>Сборки для Microsoft 365 Apps там не уточняются, поэтому смотрите бюллетень Microsoft по этой уязвимости. Номера лучше сверить с первоисточником, а не с нашим пересказом.</p>
 <h2>Что сделать до конца дня</h2>
 <ol>
 <li><b>Найдите все устройства с классическим Outlook:</b> Microsoft 365 Apps, Office LTSC 2021 и 2024. Не забудьте терминальные серверы и ноутбуки на удалёнке.</li>
@@ -37,13 +48,16 @@ a{color:#2a6df4}footer{margin-top:40px;padding-top:18px;border-top:1px solid var
 <li><b>Поищите следы в журналах:</b> необычные исходящие подключения Outlook и события NTLM-аутентификации после открытия писем. Это повод для проверки, а не готовая сигнатура: проверенных индикаторов компрометации Microsoft не опубликовала.</li>
 </ol>
 <h2>Чего мы пока не знаем</h2>
-<p>Неизвестно, кто стоит за атаками, с какого момента они идут и сколько организаций пострадало: в доступных нам материалах этих сведений нет. Не раскрыто, какое именно «действие пользователя» нужно сверх открытия файла, и нет подробностей о том, как атакующие подбирали цели.</p>
+<p>Неизвестно, кто стоит за атаками, с какого момента они идут и сколько организаций пострадало: в доступных нам материалах этих сведений нет.</p>
+<p>Не раскрыто, какое именно «действие пользователя» нужно сверх открытия файла, и нет подробностей о том, как атакующие подбирали цели.</p>
 <p>Мы также не нашли подтверждений, что кампания направлена на российские компании, и не станем её выдумывать. При этом атаки на NTLM давно известны, поэтому после выхода патча схему, вероятно, смогут повторить и другие группы.</p>
-<p>Отдельно об информационной гигиене. В день выхода патчей появляется много материалов с разными цифрами: одни говорят про 1094 записи, другие про 1235. Вероятно, считают по-разному: учитывают или не учитывают Edge и записи, исправленные ранее. Не тратьте время на споры о числе. Спросите себя, закрыты ли у вас именно те дыры, которые уже эксплуатируются, и сколько времени уйдёт, чтобы проверить это по всему парку.</p>
+<p>Отдельно об информационной гигиене. В день выхода патчей появляется много материалов с разными цифрами: одни говорят про 1094 записи, другие про 1235.</p>
+<p>Вероятно, считают по-разному: учитывают или не учитывают Edge и записи, исправленные ранее. Не тратьте время на споры о числе.</p>
+<p>Спросите себя, закрыты ли у вас именно те дыры, которые уже эксплуатируются, и сколько времени уйдёт, чтобы проверить это по всему парку.</p>
 <h2>Вместо итога</h2>
 <p>Patch Tuesday — это не событие, где нужно «накатить всё». Это ежемесячная возможность проверить, насколько хорошо вы знаете свой парк.</p>
 <p>Если вы не можете за десять минут сказать, на скольких машинах стоит Outlook и какая у него сборка, то проблема не в этой уязвимости, а в учёте, и следующая дыра найдёт вас в таком же положении.</p>
 <p><b>А как у вас устроено обновление Office:</b> через Windows Update, через централизованные средства или «как получится»? И сколько времени заняла бы проверка сборок на всех ПК прямо сейчас? Напишите в комментариях, нам правда интересно.</p>
-<p>Нужна помощь? <a href="https://t.me/rootlab_help_bot?start=outlook-ntlm">Напишите нам</a></p>
-<p>#безопасность #outlook #ntlm #уязвимости #зривкорень</p>
+<p class="cta">Нужна помощь? <a href="https://t.me/rootlab_help_bot?start=outlook-ntlm">Напишите нам</a></p>
+<p class="tags">#безопасность #outlook #ntlm #уязвимости #зривкорень</p>
 <footer>RootLab: практика DevOps и ИБ без воды. <a href="https://t.me/journal_RL">Telegram</a> · <a href="https://vk.com/journal_rl">ВКонтакте</a> · <a href="https://dzen.ru/rootlab">Дзен</a></footer></main></body></html>
