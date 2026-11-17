@@ -1,0 +1,49 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🚨 Файрвол как плацдарм: взломали около двух десятков клиентов Check Point</title><meta property="og:title" content="🚨 Файрвол как плацдарм: взломали около двух десятков клиентов Check Point"><meta property="og:image" content="https://rdn513.github.io/rootlab-feed/2026-11-16/am.png"><meta property="og:type" content="article">
+<style>:root{--bg:#fff;--fg:#1c1e21;--mut:#6b7280;--ac:#b3261e;--line:#e5e7eb;--card:#f4f5f7}@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8eaed;--mut:#9aa0a6;--line:#2b2f38;--card:#1a1d24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:19px/1.8 -apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:680px;margin:0 auto;padding:28px 20px 80px}img.cover{width:100%;border-radius:16px;display:block}
+h1{font-size:32px;line-height:1.22;margin:28px 0 8px;letter-spacing:-.01em}.meta{color:var(--mut);font-size:15px;margin-bottom:34px}
+p{margin:0 0 1.35em}p.lead{font-size:22px;line-height:1.6;font-weight:600;margin-bottom:1.6em}
+ul,ol{padding:0;list-style:none;margin:1.6em 0 1.8em;counter-reset:n}li{counter-increment:n;position:relative;padding:14px 16px 14px 56px;margin:0 0 12px;background:var(--card);border-radius:12px}
+li:before{content:counter(n);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ac);color:#fff;font:700 15px/28px sans-serif;text-align:center}
+blockquote{margin:2em 0;padding:6px 0 6px 20px;border-left:4px solid var(--ac);font-size:22px;line-height:1.5;font-style:italic}
+h2{font-size:25px;line-height:1.3;margin:2em 0 .6em}
+p.cta{margin:2em 0 1.4em;padding:18px 20px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+p.src{font-size:15px;line-height:1.6;color:var(--mut);margin:2em 0 .8em;padding-top:18px;border-top:1px solid var(--line)}p.tags{font-size:15px;color:var(--mut)}
+a{color:#2a6df4}footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:15px}</style></head>
+<body><main><img class="cover" src="https://rdn513.github.io/rootlab-feed/2026-11-16/am.png" alt=""><h1>🚨 Файрвол как плацдарм: взломали около двух десятков клиентов Check Point</h1><div class="meta">RootLab · 16.11.2026</div><p class="lead">Ранее мы писали про PHP2Shell, две критические дыры в самом PHP. Теперь у истории продолжение, и оно куда неприятнее: через те же дыры взламывают файрволы Check Point.</p>
+<p>По данным Check Point, <a href="https://securityonline.info/check-point-gateway-vulnerability-cve-2026-123039/">которые приводит SecurityOnline</a>, атаки затронули около двух десятков клиентов.</p>
+<p>Первая волна пришлась на 30 октября и била по израильским организациям, вторая началась 2 ноября и затронула несколько стран и отраслей.</p>
+<p>Цепочка простая и от этого особенно досадная. Сначала атакующие через PHP2Shell (CVE-2026-109618 и CVE-2026-109619, CVSS 9,2) выполняют код на портале Mobile Access. Затем повышают права до root через CVE-2026-123039.</p>
+<p>Вторая дыра сама по себе скромнее: CVSS 7,8, локальное повышение привилегий в сервисе DynamicCLI операционной системы Gaia.</p>
+<p>Процесс dynamic_server работает от root и принимает команды через сокет, у которого права 0777, то есть писать в него может любой локальный пользователь, а отправителя сервис не проверяет.</p>
+<p>Отдельно она никого бы не напугала: нужен уже имеющийся доступ к устройству. Но PHP2Shell этот доступ и даёт. Вместе получается полный захват шлюза, 13 ноября CISA внесла CVE-2026-123039 в каталог эксплуатируемых уязвимостей.</p>
+<p>Дальше хуже. Как <a href="https://www.csoonline.com/article/4248693/the-firewall-becomes-the-foothold-attackers-turn-check-point-gateways-against-customers.html">описывает CSO Online</a>, веб-шеллы прячут в шаблонах страницы входа портала, ставят бэкдор TSGA и вредонос TSProxy.</p>
+<p>TSProxy переживает перезагрузки, прячется в резервных копиях и снимках и маскируется под процессы устройства.</p>
+<p>Бэкдор TSGA умеет копировать конфигурацию файрвола и менять логи, а значит, журналам на самом шлюзе доверять уже нельзя.</p>
+<p>В части случаев атакующие шли дальше: по SSH переходили на хост VMware ESXi и запускали вайпер destroy_v6. То есть файрвол стал не целью, а плацдармом.</p>
+<p>Вторая волна, по данным Check Point, разрушительной активности не зафиксировано.</p>
+<p>Теперь к практике. Затронуты Gaia R82.20, R82.10, R82, R81.20, R81.10 и R81: Force Firewalls, серверы Management и Log, Multi-Domain и Maestro Orchestrator. Spark Firewalls и Smart-1 Cloud не затронуты.</p>
+<p>Исправления выходят в составе Jumbo Hotfix: R82.20 начиная с Take 14, R82.10 с Take 52, R82 с Take 132, R81.20 с Take 174.</p>
+<p>Для R81.10 и R81 в бюллетене исправлений не указано, это версии вне поддержки, и тут остаётся обходной путь и план обновления.</p>
+<p>Мы считаем, что главное в этой истории не номер Take, а порядок действий. Патч закрывает дыру, но не выгоняет того, кто уже закрепился.</p>
+<p>Если ваш шлюз с открытым Mobile Access стоял в интернете с конца октября, исходите из того, что его могли взломать, пока не докажете обратное.</p>
+<p>Что мы бы сделали по порядку:</p>
+<ul>
+<li>Отключите Mobile Access там, где он не нужен, и уберите интерфейсы управления из интернета.</li>
+<li>Установите хотфикс, в первую очередь на шлюзы с Mobile Access, доступным снаружи. Если сразу нельзя, остановите процесс dynamic_server и не давайте ему перезапуститься, учтя, что часть команд Dynamic CLI перестанет работать.</li>
+<li>Проверьте /var/log/dynamicCli.log: команды, пришедшие не через стандартную обёртку Clish, надо расследовать. После патча права на сокет должны быть 0660, а не 0777.</li>
+<li>Не забудьте закрыть сам PHP2Shell на портале, иначе цепочка останется открытой.</li>
+<li>Разорвите доверенный путь между файрволом и гипервизором ESXi и отправляйте логи на внешнюю систему в реальном времени.</li>
+<li>При признаках компрометации не лечите на месте, а переустанавливайте устройство с доверенного образа.</li>
+</ul>
+<p>Чего мы не знаем. Check Point, по данным источников, не называет виновных с высокой уверенностью, и мы не берёмся. Сколько среди пострадавших российских компаний, неизвестно.</p>
+<p>Данные опираются на заявление Check Point и три публикации, поэтому масштаб стоит сверять с официальным бюллетенем Check Point.</p>
+<p>Ирония в том, что периметровое устройство, которое должно защищать, оказалось самым привлекательным входом. Логи, которые пишет само устройство, при таком сценарии стоят ровно столько, сколько стоит доверие к самому устройству.</p>
+<p>Поэтому вынос журналов наружу не роскошь, а минимальная гигиена.</p>
+<p>А ваши периметровые шлюзы шлют логи на отдельный сервер в реальном времени или всё лежит только на них самих? 👨‍💻</p>
+<p class="cta">Если честный ответ «не знаем, что у нас торчит наружу», <a href="https://t.me/rootlab_help_bot?start=checkpoint-gaia">напишите нам</a>: поможем разобраться, что у вас видно из интернета, и настроить отправку логов на отдельный сервер.</p>
+<p class="src">Источники: <a href="https://www.csoonline.com/article/4248693/the-firewall-becomes-the-foothold-attackers-turn-check-point-gateways-against-customers.html">CSO Online</a>, <a href="https://securityonline.info/check-point-gateway-vulnerability-cve-2026-123039/">SecurityOnline</a>, <a href="https://cybersecuritynews.com/check-point-0-day-vulnerability/">Cyber Security News</a></p>
+<p class="tags">#уязвимости #файрвол #checkpoint #зривкорень</p>
+<footer>RootLab: практика DevOps и ИБ без воды. <a href="https://t.me/journal_RL">Telegram</a> · <a href="https://vk.com/journal_rl">ВКонтакте</a> · <a href="https://dzen.ru/rootlab">Дзен</a></footer></main></body></html>

@@ -1,0 +1,48 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Через A/B-платформу Optimizely заразили сайты 178 организаций, включая BBC, CNN и HSBC</title><meta property="og:title" content="Через A/B-платформу Optimizely заразили сайты 178 организаций, включая BBC, CNN и HSBC"><meta property="og:image" content="https://rdn513.github.io/rootlab-feed/2026-11-17/pm.png"><meta property="og:type" content="article">
+<style>:root{--bg:#fff;--fg:#1c1e21;--mut:#6b7280;--ac:#b3261e;--line:#e5e7eb;--card:#f4f5f7}@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#e8eaed;--mut:#9aa0a6;--line:#2b2f38;--card:#1a1d24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:19px/1.8 -apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:680px;margin:0 auto;padding:28px 20px 80px}img.cover{width:100%;border-radius:16px;display:block}
+h1{font-size:32px;line-height:1.22;margin:28px 0 8px;letter-spacing:-.01em}.meta{color:var(--mut);font-size:15px;margin-bottom:34px}
+p{margin:0 0 1.35em}p.lead{font-size:22px;line-height:1.6;font-weight:600;margin-bottom:1.6em}
+ul,ol{padding:0;list-style:none;margin:1.6em 0 1.8em;counter-reset:n}li{counter-increment:n;position:relative;padding:14px 16px 14px 56px;margin:0 0 12px;background:var(--card);border-radius:12px}
+li:before{content:counter(n);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ac);color:#fff;font:700 15px/28px sans-serif;text-align:center}
+blockquote{margin:2em 0;padding:6px 0 6px 20px;border-left:4px solid var(--ac);font-size:22px;line-height:1.5;font-style:italic}
+h2{font-size:25px;line-height:1.3;margin:2em 0 .6em}
+p.cta{margin:2em 0 1.4em;padding:18px 20px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+p.src{font-size:15px;line-height:1.6;color:var(--mut);margin:2em 0 .8em;padding-top:18px;border-top:1px solid var(--line)}p.tags{font-size:15px;color:var(--mut)}
+a{color:#2a6df4}footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:15px}</style></head>
+<body><main><img class="cover" src="https://rdn513.github.io/rootlab-feed/2026-11-17/pm.png" alt=""><h1>Через A/B-платформу Optimizely заразили сайты 178 организаций, включая BBC, CNN и HSBC</h1><div class="meta">RootLab · 17.11.2026</div><p class="lead">Представьте: вы ничего не меняли на сайте, а в тот же день скрипт на ваших страницах начал подменять посетителям адрес криптокошелька. Именно так 16 ноября выглядела история с Optimizely.</p>
+<p>Optimizely Web — платформа для A/B-тестирования, которой пользуются крупные сайты. Вредоносный код нашли в 188 скриптах у 178 организаций.</p>
+<p>Среди них BBC, CNN, Fox News, HSBC, Equifax, Zoom, Salesforce, GitLab и IKEA, <a href="https://www.anti-malware.ru/news/2026-11-17-111332/52071">сообщает Anti-Malware.ru</a>. Оба числа — по данным Report URI, независимой проверки у нас нет, и это минимум по проверенным скриптам.</p>
+<p>Первое заражение зафиксировано в 04:21 UTC в скрипте BBC. В течение дня нагрузку обновляли 26 раз, вероятно, подстраивая код под защиту.</p>
+<p>Механика простая и неприятная. Злоумышленники изменили в клиентских проектах поле Project JavaScript и добавили загрузку файла с постороннего домена.</p>
+<p>Всё остальное по-прежнему приходило с cdn.optimizely.com, поэтому внешне ничего не выглядело подозрительным.</p>
+<p>Код подменял адреса криптокошельков на страницах, в формах, ссылках и буфере обмена, а ещё собирал cookie без защиты HttpOnly и адреса открытых страниц.</p>
+<p>Около 13:43 UTC добавился модуль, который перехватывал номер карты, срок действия и CVV в формах на самих сайтах.</p>
+<p>Платёжные формы Stripe и Adyen открываются во вложенном iframe, и на таких формах скрипт данные не читал. На кошельки злоумышленников к вечеру 16 ноября, по <a href="https://hashtelegraph.com/hakery-zarazili-sayty-bbc-ikea-i-zoom-dlya-krazhi-bankovskih-kart-i-vzloma-iphone/">данным со ссылкой на Report URI</a>, поступило около 7 040 долларов.</p>
+<p>Сколько карт и cookie утекло, неизвестно.</p>
+<p>Отдельная история про iPhone. Код пытался запускать эксплойт-наборы Coruna для iOS 13–17 и DarkSword для iOS 18. Для iOS 26 нашлась цепочка, которая пока только собирала данные об устройстве.</p>
+<p>Подтверждённых взломов исследователи не зафиксировали.</p>
+<p>Optimizely подтвердила атаку, по её версии причиной стала уязвимость в регистрации учётных записей Experimentation. Компания закрыла дыру, удалила код и уведомила клиентов. К 21:52 UTC заражённым оставался один скрипт из 188.</p>
+<p>Самое поучительное в цифрах: политика CSP заблокировала вредоносный код лишь на 24 из 256 проверенных сайтов. Почему так мало, источники не объясняют; возможно, у большинства сайтов CSP либо нет, либо она слишком широкая.</p>
+<p>Мы считаем, что это классическая атака на цепочку поставки, где «слабое звено» не ваш сервер, а чужой аккаунт с правом править то, что исполняется у ваших посетителей. И закрыть её только настройками браузера нельзя.</p>
+<p>Чтобы понять масштаб, вспомните, зачем вообще нужны такие платформы. Маркетологи хотят проверять гипотезы без разработчиков: поменять заголовок, цвет кнопки, порядок блоков.</p>
+<p>Для этого сервис выдаёт скрипт, который грузится на каждой странице и может менять в ней что угодно.</p>
+<p>Именно поэтому поле с пользовательским JavaScript — это фактически право исполнять код в браузерах всех ваших посетителей. А защищено оно обычной учётной записью, и в этой истории её обошли через уязвимость в регистрации.</p>
+<p>Реакция компаний тоже показательна. По данным HashTelegraph, Salesforce отключила скрипты Optimizely и расследует изменения, а Equifax отказалась от сервиса и не нашла компрометации собственных систем.</p>
+<p>Мы считаем это разумным порядком действий: сначала отключить, потом разбираться.</p>
+<p>Версии iOS стоит запомнить на всякий случай. По данным разработчиков наборов, эксплойты не работают на iOS 18.7.3 и новее и на iOS 26.3 и новее.</p>
+<p>Если в парке есть iPhone на iOS ниже 18.7.3 или ниже 26.3, обновите их, а устройства, которые обновить нельзя, не используйте для рабочего доступа.</p>
+<p>С чего бы начали мы:</p>
+<ul><li>Составьте список всех внешних скриптов на сайте: аналитика, A/B-тесты, чаты, пиксели.</li><li>Выясните, кто в вашей команде и у подрядчиков может менять настройки этих сервисов, и уберите лишние доступы.</li><li>Включите двухфакторную защиту и журнал изменений в каждом таком сервисе.</li><li>Задайте строгий список разрешённых доменов в script-src и connect-src и подключите отчёты о нарушениях.</li><li>Для критичных страниц оплаты выносите ввод карты в iframe платёжного провайдера, как делают Stripe и Adyen.</li></ul>
+<p>Заметьте ещё одну деталь. Вредонос не стал ломать сайты и поднимать шум: он тихо подменял кошельки и собирал карты.</p>
+<p>Мы считаем, что такие атаки живут долго: здесь о ней сообщил внешний исследователь, а не собственные алерты владельцев.</p>
+<p>Поэтому мониторинг изменений в сторонних скриптах стоит завести так же, как мониторинг целостности собственных файлов: оповещение о любых изменениях содержимого и о появлении новых внешних доменов.</p>
+<p>Для платёжных страниц принцип ещё жёстче: чем меньше чужого кода рядом с полем ввода карты, тем лучше. Формы Stripe и Adyen в iframe в этой истории код не читал.</p>
+<p>Чего мы пока не знаем: сколько посетителей успели пострадать, сколько карт утекло и были ли успешные заражения iPhone. Расследование Optimizely продолжается.</p>
+<p>Если коротко: сторонний скрипт на сайте — это чужой код с вашими правами, и за ним нужен такой же контроль, как за вашим собственным.</p>
+<p>А кто у вас может добавить скрипт на сайт без ревью: маркетолог, подрядчик или никто не знает? 🧐</p>
+<p class="cta">Если честный ответ «не знаем», <a href="https://t.me/rootlab_help_bot?start=optimizely-third-party-scripts">напишите нам</a>: поможем навести порядок в учёте сторонних скриптов и доступов.</p>
+<p class="src">Источники: <a href="https://www.anti-malware.ru/news/2026-11-17-111332/52071">Anti-Malware.ru</a>, <a href="https://hashtelegraph.com/hakery-zarazili-sayty-bbc-ikea-i-zoom-dlya-krazhi-bankovskih-kart-i-vzloma-iphone/">HashTelegraph</a></p>
+<footer>RootLab: практика DevOps и ИБ без воды. <a href="https://t.me/journal_RL">Telegram</a> · <a href="https://vk.com/journal_rl">ВКонтакте</a> · <a href="https://dzen.ru/rootlab">Дзен</a></footer></main></body></html>
